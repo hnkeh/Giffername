@@ -1,15 +1,3 @@
-# USING FOR IMAGES.
-# import os
-# import imageio
-
-# gif_dir = './Downloads/gifs/'
-# images = []
-# for file_name in os.listdir(gif_dir):
-#     if file_name.endswith('.gif'):
-#         file_path = os.path.join(gif_dir, file_name)
-#         images.append(imageio.imread(file_path))
-# imageio.mimsave('./Downloads/gifs/movie.gif', images)
-
 #Python imports.
 import glob
 from boxx import *
@@ -17,11 +5,12 @@ from boxx.ylimg.ylimgVideoAndGif import *
 
 #Main class.
 class Giffeator:
-    def __init__(self):
+    def __init__(self, gif_path):
         
         #Values.
         self.gif_names = ["ddd", "lol", "sss"]
-        self.gif_path = "/downloaded_gifs/"
+        #self.gif_path = "/downloaded_gifs/"
+        self.gif_path = gif_path
         self.fps = 24
         self.spatial_down_sample = 1
         self.time_down_sample = 1
@@ -35,12 +24,17 @@ class Giffeator:
     def merge_gifs(self):
 
         _read_gifs = []
-        for gif_name in gif_names:
-            _current_gif = imread(gif_path + gif_name + '.gif')[::]
+        _gif_files = glob(self.gif_path + "*.gif")
+        
+        for gifname in _gif_files:
+            formated_gifname = gifname.split("/downloaded_gifs/")
+            print("'" + formated_gifname[1] + "', ")
+            _current_gif = imread(self.gif_path + formated_gifname[1])[::]
             _read_gifs += [_current_gif]
-
+            
         ss = npa(map(x_.shape, _read_gifs))
-    
+
+        print(ss)
         fs = ss[:,0]
         shape = ss.max(0)[[1, 2]]
         news = []
@@ -53,4 +47,4 @@ class Giffeator:
             news.extend(np.zeros((3, *shape, c), np.uint8))
         newgif = npa-news
 
-        gifSave(newgif[::time_down_sample,::spatial_down_sample,::spatial_down_sample,::],'./Downloads/gifs/merged_one.gif',fps)
+        gifSave(newgif[::time_down_sample,::spatial_down_sample,::spatial_down_sample,::],'./Downloads/gifs/one.gif',fps)
