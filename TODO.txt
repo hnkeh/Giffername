@@ -1,0 +1,6 @@
+Runtime
+Read username >> check dictionary >> create list >> search/download gifs >> create gif(w/ words) >> upload gif >> create comment
+
+Config file -> Skip loop
+
+Fix only gifs.
