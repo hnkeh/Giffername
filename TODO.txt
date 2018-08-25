@@ -1,6 +1,8 @@
-Runtime
+//Runtime
 Read username >> check dictionary >> create list >> search/download gifs >> create gif(w/ words) >> upload gif >> create comment
 
+//Refactor
 Config file -> Skip loop
 
-Fix only gifs.
+//TODO
+Fix only gifs. - Done
