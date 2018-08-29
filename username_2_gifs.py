@@ -20,6 +20,7 @@ class Giffername:
         
         #Objects.
         self.username_parser = UsernameParser(self.username, self.dictionary_language)
+        self.gif_creator = Giff_creator(self.gif_download)
 
     #Public functions.
     #Returns url of uploaded gif.
@@ -31,8 +32,7 @@ class Giffername:
         #_keywords = self.username_parser.get_words_in_username()
         #giffloader = Giffloader(_keywords, self.gif_download_path)
         #giffloader.download_gifs()
-        giffeator = Giffeator(self.gif_download_path)
-        giffeator.merge_gifs()
+        self.gif_creator.merge_gifs()
         
 
 

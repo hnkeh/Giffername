@@ -4,7 +4,7 @@ from boxx import *
 from boxx.ylimg.ylimgVideoAndGif import *
 
 #Main class.
-class Giffeator:
+class Giff_creator:
     def __init__(self, gif_path):
         
         #Values.
