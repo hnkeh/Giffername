@@ -4,7 +4,7 @@
 # for f in foo:
 #     fl = f.split("/downloaded_gifs/")
 #     print(fl[1])
-
+        url = 'https://www.google.com/search?as_st=y&tbm=isch&as_q=' + quote(search_term) + '&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=imgur.com&safe=images&tbs=isz:m,itp:animated,ic:trans,iar:s,ift:gif#imgrc=ZCwd24HS3ksnbM:'
 from boxx import *
 from boxx.ylimg.ylimgVideoAndGif import *
 import os
