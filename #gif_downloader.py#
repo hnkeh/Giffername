@@ -1,6 +1,5 @@
 # Python imports.
 from google_images_download import google_images_download
-from request import * 
 
 # Main class.
 class Giffloader:
