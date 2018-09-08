@@ -8,11 +8,14 @@ class Giffloader:
         self.keywords = keywords
         self.download_path = download_path
 
+        # Adding fixed search function.
+        #google_images_download.googleimagesdownload.suited_search = self._search        
         # Objects.
         self.response = google_images_download.googleimagesdownload()
 
-        self.response.search = self._search
+        setattr(google_images_download.googleimagesdownload, "suited_download", self._search)
 
+        
     # Private functions.
     # Download single gif.
     def _download_gif(self, search_word):
@@ -29,30 +32,28 @@ class Giffloader:
     # Suited search.
     def _search(self, search_word):
 
-        #Values.
-        search_term = search_word
+        # Values.
         main_directory = "downloads"
-        paths = {}
-        i = 0
 
         print("Evaluating...")
         
         dir_name = "sub_dir_name"
+        limit = 1
 
-        #create directories in OS.
-        self.response.create_directories(main_directory,dir_name, "foo")
+        # Create directories in OS.
+        self.response.create_directories(main_directory, dir_name, "foo")
 
-        url = 'https://www.google.com/search?as_st=y&tbm=isch&as_q=' + quote(search_term) + '&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=imgur.com&safe=images&tbs=isz:m,itp:animated,ic:trans,iar:s,ift:gif#imgrc=ZCwd24HS3ksnbM:'
+        url = 'https://www.google.com/search?as_st=y&tbm=isch&as_q=' + search_word + '&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=imgur.com&safe=images&tbs=isz:m,itp:animated,ic:trans,iar:s,ift:gif#imgrc=ZCwd24HS3ksnbM:'
 
         raw_html = self.response.download_page(url)
 
-        print("Starting Download...")
+        items, errorCount, abs_path = self.response._get_all_items(raw_html, main_directory, dir_name, limit)
         
-        items, errorCount, abs_path = self.response._get_all_items(raw_html,main_directory,dir_name, 1)    #get all image items and download images
-
-    #Public functions.
-    #Download multiple gifs.
+        print("dl done")
+         
+    # Public functions.
+    # Download multiple gifs.
     def download_gifs(self):
         for word in self.keywords:
-            self._download_gif(word)
+            self.response.suited_download(word)
 

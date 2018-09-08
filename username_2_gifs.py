@@ -1,33 +1,33 @@
-#Python imports.
+# Python imports.
 import os
 
-#Local imports.
+# Local imports.
 from parse_username import *
 from gif_downloader import *
 from gif_creator import *
 
-#Main class.
+# Main class.
 class Giffername:
     def __init__(self, username, dictionary_language = "en_US"):
-        #Path initializer.
+        # Path initializer.
         self.dirname = os.path.dirname(__file__)
         self.filename = os.path.join(self.dirname, 'downloaded_gifs/')
 
-        #Values.
+        # Values.
         self.username = username
         self.dictionary_language = dictionary_language
         self.gif_download_path = self.filename
         
-        #Objects.
+        # Objects.
         self.username_parser = UsernameParser(self.username, self.dictionary_language)
         self.gif_creator = Giff_creator(self.gif_download_path)
 
-    #Public functions.
-    #Returns url of uploaded gif.
+    # Public functions.
+    # Returns url of uploaded gif.
     def get_imgur_url(self):
         pass
 
-    #Start Giffername.
+    # Start Giffername.
     def start(self):
         _keywords = self.username_parser.get_words_in_username()
         giffloader = Giffloader(_keywords, self.gif_download_path)
