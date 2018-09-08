@@ -7,53 +7,37 @@ class Giffloader:
         # Values:
         self.keywords = keywords
         self.download_path = download_path
+        self.arguments = {"keywords":self.keywords,
+                          "limit":1,
+                          "output_directory":self.download_path}
 
-        # Adding fixed search function.
-        #google_images_download.googleimagesdownload.suited_search = self._search        
         # Objects.
         self.response = google_images_download.googleimagesdownload()
-
-        setattr(google_images_download.googleimagesdownload, "suited_download", self._search)
-
+        
+        # Adding fixed search function.
+        setattr(google_images_download.googleimagesdownload, "suited_download", self._suited_search)
         
     # Private functions.
-    # Download single gif.
-    def _download_gif(self, search_word):
-        self.arguments = {"keywords":search_word,
-                          "limit":1,
-                          "language":"English",
-                          "no_directory":True,
-                          "format":"gif",
-                          "output_directory":self.download_path}
-    
-
-        self.response.search(self.arguments)
-
     # Suited search.
-    def _search(self, search_word):
+    def _suited_search(self, search_word):
+
+        # Adding arguments for google_images_download.
+        for arg in google_images_download.args_list:
+            if arg not in self.arguments:
+                self.arguments[arg] = None
 
         # Values.
-        main_directory = "downloads"
-
-        print("Evaluating...")
+        _sub_dir = "gifs"
+        _url = 'https://www.google.com/search?as_st=y&tbm=isch&as_q=' + search_word + '&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=imgur.com&safe=images&tbs=isz:m,itp:animated,ic:trans,iar:s,ift:gif#imgrc=ZCwd24HS3ksnbM:'
         
-        dir_name = "sub_dir_name"
-        limit = 1
-
         # Create directories in OS.
-        self.response.create_directories(main_directory, dir_name, "foo")
-
-        url = 'https://www.google.com/search?as_st=y&tbm=isch&as_q=' + search_word + '&as_epq=&as_oq=&as_eq=&cr=&as_sitesearch=imgur.com&safe=images&tbs=isz:m,itp:animated,ic:trans,iar:s,ift:gif#imgrc=ZCwd24HS3ksnbM:'
-
-        raw_html = self.response.download_page(url)
-
-        items, errorCount, abs_path = self.response._get_all_items(raw_html, main_directory, dir_name, limit)
-        
-        print("dl done")
+        self.response.create_directories(self.download_path, _sub_dir, "foo")
+        # Downloading images.
+        _raw_html = self.response.download_page(_url)
+        items, errorCount, abs_path = self.response._get_all_items(_raw_html, self.download_path, _sub_dir, 1, self.arguments)
          
     # Public functions.
     # Download multiple gifs.
     def download_gifs(self):
         for word in self.keywords:
             self.response.suited_download(word)
-

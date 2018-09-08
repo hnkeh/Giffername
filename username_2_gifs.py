@@ -38,4 +38,3 @@ class Giffername:
 
 foo = Giffername(username = "himynameis")
 foo.start()
-    
