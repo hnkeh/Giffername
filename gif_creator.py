@@ -8,7 +8,7 @@ class Giff_creator:
     def __init__(self, gif_path):
         
         #Values.
-        self.gif_names = ["ddd", "lol", "sss"]
+        self.gif_names = ["loga", "show", "tree"]
         #self.gif_path = "/downloaded_gifs/"
         self.gif_path = gif_path
         self.fps = 24

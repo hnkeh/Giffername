@@ -29,10 +29,10 @@ class Giffername:
 
     # Start Giffername.
     def start(self):
-        _keywords = self.username_parser.get_words_in_username()
-        giffloader = Giffloader(_keywords, self.gif_download_path)
-        giffloader.download_gifs()
-        #self.gif_creator.merge_gifs()
+        # _keywords = self.username_parser.get_words_in_username()
+        # giffloader = Giffloader(_keywords, self.gif_download_path)
+        # giffloader.download_gifs()
+        self.gif_creator.merge_gifs()
         
 
 
